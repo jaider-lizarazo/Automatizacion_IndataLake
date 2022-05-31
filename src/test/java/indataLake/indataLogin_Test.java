@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
+import base.BasicData;
 import indataLake.indataLogin;
 @SuppressWarnings("unused")
 public class indataLogin_Test {
@@ -27,7 +28,7 @@ public class indataLogin_Test {
 	@Test
 	public void test()  throws InterruptedException{
 		indatalogin.signIn();
-	    indatalogin.createCampaign();
+	    indatalogin.createCampaign(BasicData.TEMPLATE_TYPE_2);
 	}
 
 }

@@ -3,64 +3,70 @@ package indataLake;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class indataLogin extends claseBase{
-	
-	By locator_user =By.id("email");
-	By locator_password =By.id("password");
-	By locator_inicioSesion =By.xpath("/html/body/app-root/app-sign-in/div/div/div/div/div/div/form/div[3]/button");
-	By locator_xphat =By.xpath("/html/body/app-root/app-sign-in/div/div/div/div/div/div/div/img");
-	By locator_plantilla = By.linkText("Crear Plantilla");
-	By locator_seleccionar =By.xpath("/html/body/app-root/app-indatalake-layout/div/div/div/div/app-template-browser/div/div[1]/div/div/button");
-	By locator_crear= By.xpath("//*[@id=\"modal\"]/button");
-	By locator_productoradio= By.id("inlineRadio1");
-	By locator_producto= By.id("producto");
-	By locator_url= By.xpath("//*[@id=\"exampleModal\"]/div/div/div/app-massive-campaing/div/div/div[2]/form/div/div[1]/div[2]/div/input");
-	By locator_asunto =By.id("asunto");
-	By locator_guardarSal=By.linkText("Guardar y salir");
-	
+import base.BasicData;
+import base.claseBase;
+
+public class indataLogin extends claseBase {
+
 	public indataLogin(WebDriver driver) {
 		super(driver);
 	}
 
 	public void signIn() {
-		if(isDisplayed(locator_user)){
-			type("camilo@yopmail.com", locator_user);
-			type("0.jjcmmt", locator_password);
-			click(locator_inicioSesion);
-			
-		}else {
-			System.out.println("No se encontro pagina de login");
-		}
-		}
-		
-		public boolean isHomePageDisplayed(){
-			return isDisplayed(locator_xphat);
-			
-		}
-	
-	public void createCampaign() throws InterruptedException{
-		if(isDisplayed(locator_xphat)){
-			
-		click(locator_plantilla);
-		Thread.sleep(2000);
-		click(locator_seleccionar);
-		Thread.sleep(2000);
-		click(locator_crear);
-		Thread.sleep(2000);
-		click(locator_productoradio);
-		type("inalámbricos", locator_producto);
-		type("https://www.inalambricos.com", locator_url);
-		type("Todo tipo de perifericos inalambricos", locator_producto);
-		Thread.sleep(2000);
-		click(locator_guardarSal);
+		try {
+			if (isDisplayed(LocatorIndataLake.LOCATOR_USER)) {
+				type(BasicData.USER_NAME, LocatorIndataLake.LOCATOR_USER);
+				type(BasicData.PASSWORD, LocatorIndataLake.LOCATOR_PASSWORD);
+				click(LocatorIndataLake.LOCATOR_INICIO_SESION);
 
-		
-	}else {
-		System.out.println("No se logro ingresar a la pagina");
+			} else {
+				System.out.println("No se encontro pagina de login");
+			}
+
+		} catch (Exception e) {
+			System.out.println("Error: " + e);
+		}
 	}
-	
-		
+
+	public void createCampaign(String TemplateType) throws InterruptedException {
+		try {
+			if (isDisplayed(LocatorIndataLake.LOCATOR_XPATH)) {
+				Thread.sleep(4000);
+				click(LocatorIndataLake.LOCATOR_CREAR_PLANTILLA);
+				Thread.sleep(2000);
+				if (BasicData.TEMPLATE_TYPE_1.equals(TemplateType)) {
+					click(LocatorIndataLake.LOCATOR_SELECCIONAR_1_COLUMNA);
+				}
+
+				if (BasicData.TEMPLATE_TYPE_2.equals(TemplateType)) {
+					click(LocatorIndataLake.LOCATOR_SELECCIONAR_2_COLUMNA);
+				}
+				
+				if (BasicData.TEMPLATE_TYPE_3.equals(TemplateType)) {
+					click(LocatorIndataLake.LOCATOR_SELECCIONAR_3_COLUMNA);
+				}
+				
+				if (BasicData.TEMPLATE_TYPE_4.equals(TemplateType)) {
+					click(LocatorIndataLake.LOCATOR_SELECCIONAR_4_COLUMNA);
+				}
+				
+				Thread.sleep(5000);
+				click(LocatorIndataLake.LOCATOR_CREAR);
+				Thread.sleep(2000);
+				click(LocatorIndataLake.LOCATOR_PRODUCTO_RADIO);
+				type(BasicData.PRODUCTO, LocatorIndataLake.LOCATOR_PRODUCTO);
+				type(BasicData.URL, LocatorIndataLake.LOCATOR_URL);
+				type(BasicData.TIPO_PRODUCTO, LocatorIndataLake.LOCATOR_ASUNTO);
+				Thread.sleep(2000);
+				click(LocatorIndataLake.LOCATOR_GUARDAR_SALIR);
+
+			} else {
+				System.out.println("No se logro ingresar a la pagina");
+			}
+		} catch (Exception e) {
+			System.out.println("Error: " + e);
+		}
+
 	}
-	
-	
+
 }
