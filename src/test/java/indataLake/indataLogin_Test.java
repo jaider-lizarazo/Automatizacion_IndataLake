@@ -29,6 +29,7 @@ public class indataLogin_Test {
 	public void test()  throws InterruptedException{
 		indatalogin.signIn();
 	    indatalogin.createCampaign(BasicData.TEMPLATE_TYPE_2);
+	    indatalogin.create();
 	}
 
 }
